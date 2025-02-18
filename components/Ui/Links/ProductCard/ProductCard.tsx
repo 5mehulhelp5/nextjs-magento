@@ -8,10 +8,10 @@ export interface ProductCardPropsType {
   currency: string;
   price: number;
   sku: string;
-  category:{
-    name:string,
-    uid:string
-  }
+  category: {
+    name: string;
+    uid: string;
+  };
 }
 
 const ProductCard = ({
@@ -20,19 +20,17 @@ const ProductCard = ({
   currency,
   price,
   sku,
-  category
+  category,
 }: ProductCardPropsType) => {
-    console.log(category)
-    const url = 
-    `/produkty/${category.name}/${sku}`
-    console.log(url,title)
+  console.log(category);
+  const url = `/produkty/${category.name}/${sku}`;
+  console.log(url, title);
   return (
     <Link href={url} className={styles.link}>
       <img src={img} />
       <h3 className={styles.name}> {title}</h3>
       <span className={styles.price}>
-        {price}{" "} 
-        {currency}
+        {price} {currency}
       </span>
     </Link>
   );
