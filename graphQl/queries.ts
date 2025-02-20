@@ -3,10 +3,10 @@ import {gql} from 'graphql-request';
 export type GET_PRODUCTS_TYPE = {
   products: {
     items: {
-      categories:{
-        uid:string,
-        name:string
-      }[]
+      categories: {
+        uid: string;
+        name: string;
+      }[];
       name: string;
       sku: string;
       price_range: {

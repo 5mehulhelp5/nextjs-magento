@@ -1,11 +1,13 @@
-import { gql } from 'graphql-request';
+import {gql} from 'graphql-request';
 
 export const GET_LAST_5_PRODUCTS = gql`
   query {
     products(search: "", pageSize: 5, currentPage: 1) {
       items {
-       categories{
-      uid name}
+        categories {
+          uid
+          name
+        }
         name
         sku
         price_range {
@@ -28,8 +30,10 @@ export const GET_ALL_PRODUCTS = gql`
   query {
     products(search: "", pageSize: 20, currentPage: 1) {
       items {
-       categories{
-      uid name}
+        categories {
+          uid
+          name
+        }
         name
         sku
         price_range {

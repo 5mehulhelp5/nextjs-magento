@@ -1,5 +1,5 @@
 'use client';
-import { GET_PRODUCTS_TYPE} from '@/graphQl/queries';
+import {GET_PRODUCTS_TYPE} from '@/graphQl/queries';
 import styles from './newProducts.module.scss';
 import ProductCard from '@/components/Ui/Links/ProductCard/ProductCard';
 
@@ -8,8 +8,9 @@ type NewProductsPropsType = {newProducts: GET_PRODUCTS_TYPE};
 const NewProducts = ({newProducts}: NewProductsPropsType) => {
   return (
     <div className={styles.container}>
-      {newProducts.products.items.map((product) => (
+      {newProducts.products.items.map((product, index) => (
         <ProductCard
+          key={index}
           sku={product.sku}
           img={product.image.url}
           title={product.name}

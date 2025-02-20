@@ -1,5 +1,4 @@
-import { gql } from 'graphql-request';
-
+import {gql} from 'graphql-request';
 
 export const GET_ALL_PULLOVERS = gql`
   query {
@@ -10,8 +9,10 @@ export const GET_ALL_PULLOVERS = gql`
       currentPage: 1
     ) {
       items {
-      categories{
-      uid name}
+        categories {
+          uid
+          name
+        }
         name
         sku
         price_range {

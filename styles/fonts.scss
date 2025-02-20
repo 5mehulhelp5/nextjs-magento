@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('../app/fonts/inter/Inter-VariableFont_opsz,wght.ttf')
+    format('truetype');
+  font-weight: 100 900; /* Zakres wagi dla fontu zmiennego */
+  font-optical-sizing: auto; /* Automatyczne dostosowanie rozmiaru optycznego */
+}
+@font-face {
+  font-family: 'Inter-Italic';
+  src: url('../app/fonts/inter/Inter-Italic-VariableFont_opsz,wght.ttf')
+    format('truetype');
+  font-weight: 100 900; /* Zakres wagi dla fontu zmiennego */
+  font-optical-sizing: auto; /* Automatyczne dostosowanie rozmiaru optycznego */
+}
+@font-face {
+  font-family: 'Poppins-100';
+  src: url('../app/fonts/poppins/Poppins-Thin.ttf');
+  font-weight: 100; /* Zakres wagi dla fontu zmiennego */
+  font-optical-sizing: auto; /* Automatyczne dostosowanie rozmiaru optycznego */
+}
+@font-face {
+  font-family: 'Poppins-200';
+  src: url('../app/fonts/poppins/Poppins-ExtraLight.ttf');
+  font-weight: 200; /* Zakres wagi dla fontu zmiennego */
+  font-optical-sizing: auto; /* Automatyczne dostosowanie rozmiaru optycznego */
+}
+@font-face {
+  font-family: 'Poppins-300';
+  src: url('../app/fonts/poppins/Poppins-Light.ttf');
+  font-weight: 300; /* Zakres wagi dla fontu zmiennego */
+  font-optical-sizing: auto; /* Automatyczne dostosowanie rozmiaru optycznego */
+}
+@font-face {
+  font-family: 'Poppins-400';
+  src: url('../app/fonts/poppins/Poppins-Regular.ttf');
+  font-weight: 400; /* Zakres wagi dla fontu zmiennego */
+  font-optical-sizing: auto; /* Automatyczne dostosowanie rozmiaru optycznego */
+}
+@font-face {
+  font-family: 'Poppins-500';
+  src: url('../app/fonts/poppins/Poppins-Medium.ttf');
+  font-weight: 500; /* Zakres wagi dla fontu zmiennego */
+  font-optical-sizing: auto; /* Automatyczne dostosowanie rozmiaru optycznego */
+}
+@font-face {
+  font-family: 'Poppins-600';
+  src: url('../app/fonts/poppins/Poppins-SemiBold.ttf');
+  font-weight: 600; /* Zakres wagi dla fontu zmiennego */
+  font-optical-sizing: auto; /* Automatyczne dostosowanie rozmiaru optycznego */
+}
+@font-face {
+  font-family: 'Poppins-700';
+  src: url('../app/fonts/poppins/Poppins-Bold.ttf');
+  font-weight: 700; /* Zakres wagi dla fontu zmiennego */
+  font-optical-sizing: auto; /* Automatyczne dostosowanie rozmiaru optycznego */
+}
+@font-face {
+  font-family: 'Poppins-800';
+  src: url('../app/fonts/poppins/Poppins-ExtraBold.ttf');
+  font-weight: 800; /* Zakres wagi dla fontu zmiennego */
+  font-optical-sizing: auto; /* Automatyczne dostosowanie rozmiaru optycznego */
+}
+@font-face {
+  font-family: 'Poppins-900';
+  src: url('../app/fonts/poppins/Poppins-Black.ttf');
+  font-weight: 900; /* Zakres wagi dla fontu zmiennego */
+  font-optical-sizing: auto; /* Automatyczne dostosowanie rozmiaru optycznego */
+}

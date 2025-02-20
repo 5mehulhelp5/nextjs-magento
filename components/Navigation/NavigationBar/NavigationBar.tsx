@@ -3,22 +3,24 @@ import NavigationButton from '@/components/Ui/Buttons/NavigationButton/Navigatio
 import styles from './navigationBar.module.scss';
 import BasketButton from '@/components/Ui/Buttons/BasketButton/BasketButton';
 import NavigationMenu from '../NavigationMenu/Menu';
-import { useState } from 'react';
+import {useState} from 'react';
 
 const NavigationBar = () => {
-  const [showNavigation,setShowNavigation]=useState(false)
-  const showNavigationHandler = ()=>{
-    setShowNavigation(true)
-  }
-  const hideNavigationHandler = ()=>{
-    setShowNavigation(false)
-  }
+  const [showNavigation, setShowNavigation] = useState(false);
+  const showNavigationHandler = () => {
+    setShowNavigation(true);
+  };
+  const hideNavigationHandler = () => {
+    setShowNavigation(false);
+  };
   return (
     <div className={styles.bar}>
-      <NavigationButton onClick={showNavigationHandler}/>
+      <NavigationButton onClick={showNavigationHandler} />
       <BasketButton />
-      <NavigationMenu showMenu={showNavigation} hideMenu={hideNavigationHandler}/>
-     
+      <NavigationMenu
+        showMenu={showNavigation}
+        hideMenu={hideNavigationHandler}
+      />
     </div>
   );
 };
