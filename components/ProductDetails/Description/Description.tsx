@@ -5,7 +5,7 @@ import styles from './description.module.scss';
 const Description = () => {
   const description = useAppSelector(
     (state) =>
-      state.productDetails.product.custom_attributesV2?.items.filter(
+      state.productDetails.productToDisplay.custom_attributesV2?.items.filter(
         (item) => item.code === 'description'
       )[0].value
   );

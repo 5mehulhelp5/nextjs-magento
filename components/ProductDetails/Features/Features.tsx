@@ -4,7 +4,7 @@ import styles from './features.module.scss';
 
 const Features = () => {
   const features = useAppSelector((state) =>
-    state.productDetails.product.custom_attributesV2?.items
+    state.productDetails.productToDisplay.custom_attributesV2?.items
       .filter((item) => item.code === 'cechy')[0]
       .value?.split('#')
   );
