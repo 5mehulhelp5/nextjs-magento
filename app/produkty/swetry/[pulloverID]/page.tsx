@@ -13,12 +13,21 @@ import Description from '@/components/ProductDetails/Description/Description';
 import ShortDescription from '@/components/ProductDetails/ShortDescription/ShortDescription';
 import Features from '@/components/ProductDetails/Features/Features';
 import Sizes from '@/components/ProductDetails/Sizes/Sizes';
+import { headers } from 'next/headers';
 
 const PulloverDetailsPage = async ({
   params,
 }: {
   params: {pulloverID: string};
 }) => {
+  const data = await fetch("https://srv721099.hstgr.cloud//rest/V1/inventory/get-product-salable-quantity/sweterek-daisy-baby-blue-m-l",{
+    method:"GET",
+    headers:{
+      'Authorization': 'Bearer ' + process.env.MAGENTO_ACCESS_TOKEN
+    }
+  })
+  const response = await data.json()
+  console.log(response)
   const sku = params.pulloverID;
   const productData: PRODUCT_DETAILS_QUERY_RESPONSE_TYPE =
     await graphQLClient.request(getProductDetails(sku));

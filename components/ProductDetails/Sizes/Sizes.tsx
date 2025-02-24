@@ -6,11 +6,12 @@ import {setProductVariant} from '@/redux/product-details-slice';
 import SizeProductButton from '@/components/Ui/Buttons/SizeProductButton/SizeProductButton';
 import AddToBasketButton from '@/components/Ui/Buttons/AddToBasketButton/AddToBasketButton';
 import {ProductCartMenuPropsType} from '@/components/Basket/CartMenu/ProductCartMenu/ProductCartMenu';
-import {addCartProduct} from '@/redux/shopping-card-slice';
+import {addCartProduct} from '@/redux/shopping-cart-slice';
+import { usePathname } from 'next/navigation';
 
 const Sizes = () => {
   const dispatch = useAppDispatch();
-
+const pathname = usePathname()
   const [selected, setSelected] = useState<null | number>(null);
   const product = useAppSelector(
     (state) => state.productDetails.productToDisplay
@@ -34,6 +35,8 @@ const Sizes = () => {
     const productToAdd: ProductCartMenuPropsType = {
       variant: sizesVariants[selected],
       name: product.name,
+      amount:1,
+      link:pathname
     };
     dispatch(addCartProduct(productToAdd));
   };
