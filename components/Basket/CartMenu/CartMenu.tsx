@@ -15,7 +15,7 @@ const CartMenu = () => {
     );
     const show = useAppSelector((state) => state.shoppingCart.showCartMenu);
 const cartId = useAppSelector(state=>state.shoppingCart.cartId)
- 
+const cartProducts = useAppSelector(state=>state.shoppingCart.cartProducts) 
     const hideCartMenuHandler = () => {
       dispatch(hideCartMenu());
     };
@@ -36,7 +36,7 @@ const cartId = useAppSelector(state=>state.shoppingCart.cartId)
     }
    
     
-  },[cartId])
+  },[cartId,cartProducts])
 
   if(!show)return null;
     return (
@@ -45,10 +45,7 @@ const cartId = useAppSelector(state=>state.shoppingCart.cartId)
         {cartMenuProducts.map((product, index) => (
           <ProductCartMenu
             key={index}
-            variant={product.variant}
-            name={product.name}
-            amount={product.amount}
-            link={product.link}
+            {...product}
           />
         ))}
       </div>

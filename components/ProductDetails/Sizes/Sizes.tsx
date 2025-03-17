@@ -8,6 +8,9 @@ import AddToBasketButton from '@/components/Ui/Buttons/AddToBasketButton/AddToBa
 import {ProductCartMenuPropsType} from '@/components/Basket/CartMenu/ProductCartMenu/ProductCartMenu';
 import {addCartProduct} from '@/redux/shopping-cart-slice';
 import { usePathname } from 'next/navigation';
+import graphQLClient from '@/graphQl/graphQLClient';
+import { NextResponse } from 'next/server';
+import { CartResponse } from '@/app/api/addProductToCart/route';
 
 const Sizes = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +19,7 @@ const pathname = usePathname()
   const product = useAppSelector(
     (state) => state.productDetails.productToDisplay
   );
+  const cartId = useAppSelector(state=>state.shoppingCart.cartId)
   const sizesVariants = product.variants;
 
   if (!sizesVariants) return null;
@@ -30,15 +34,42 @@ const pathname = usePathname()
     };
     dispatch(setProductVariant(dataToSet));
   };
-  const addToBasketHandler = () => {
+
+const addProductToCart = async(cart_id:string,product_sku:string )=> {
+  const response = await fetch("/api/addProductToCart", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ cart_id, product_sku }),
+  });
+
+  const data = await response.json();
+  return data
+}
+
+// const addProductToCartApi = async()=>{
+//       const response = await fetch("/api/addProductToCart", {
+//         method: "POST",
+//         body
+//       });
+//       const data= await response.json();
+//       dispatch(setCartId(data.createGuestCart.cart.id))
+//     }
+
+  const addToBasketHandler = async () => {
     if (selected === null) return;
-    const productToAdd: ProductCartMenuPropsType = {
-      variant: sizesVariants[selected],
-      name: product.name,
-      amount:1,
-      link:pathname
-    };
-    dispatch(addCartProduct(productToAdd));
+    if(!cartId)return;
+    // const productToAdd: ProductCartMenuPropsType = {
+    //   variant: sizesVariants[selected],
+    //   name: product.name,
+    //   amount:1,
+    //   link:pathname
+    // };
+    const cart:CartResponse = await addProductToCart(cartId,sizesVariants[selected].product.sku);
+    if(!cart)return;
+    const cartItems = cart.data.addProductsToCart.cart.items
+    dispatch(addCartProduct({array:cartItems,link:pathname}));
+    // const basket = await graphQLClient.request(addProductToCartGQL({cart_id:cartId,product_sku:sizesVariants[selected].product.sku})) 
+    
   };
 
   return (

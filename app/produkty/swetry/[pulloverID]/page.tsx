@@ -20,14 +20,14 @@ const PulloverDetailsPage = async ({
 }: {
   params: {pulloverID: string};
 }) => {
-  const data = await fetch("https://srv721099.hstgr.cloud//rest/V1/inventory/get-product-salable-quantity/sweterek-daisy-baby-blue-m-l",{
-    method:"GET",
-    headers:{
-      'Authorization': 'Bearer ' + process.env.MAGENTO_ACCESS_TOKEN
-    }
-  })
-  const response = await data.json()
-  console.log(response)
+  // const data = await fetch(`https://srv721099.hstgr.cloud//rest/V1/inventory/get-product-salable-quantity/${params.pulloverID}`,{
+  //   method:"GET",
+  //   headers:{
+  //     'Authorization': 'Bearer ' + process.env.MAGENTO_ACCESS_TOKEN
+  //   }
+  // })
+  // const response = await data.json()
+  // console.log(response)
   const sku = params.pulloverID;
   const productData: PRODUCT_DETAILS_QUERY_RESPONSE_TYPE =
     await graphQLClient.request(getProductDetails(sku));
