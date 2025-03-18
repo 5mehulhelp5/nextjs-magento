@@ -3,7 +3,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 350px;
+  width: 450px;
   opacity: 1;
   background-color: white;
   height: 100vh;
@@ -13,6 +13,7 @@
   align-items: flex-end;
   padding: 1rem;
   animation: slideIn 0.5s ease-in-out;
+  gap: 1rem;
 }
 @keyframes slideIn {
   from {

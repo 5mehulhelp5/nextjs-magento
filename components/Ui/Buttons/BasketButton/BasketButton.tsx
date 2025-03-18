@@ -2,7 +2,7 @@
 import {useAppDispatch} from '@/redux/hooks';
 import styles from './basketButton.module.scss';
 import BasketIcon from '@/public/assets/icons/basket.svg';
-import {showCartMenu} from '@/redux/shopping-card-slice';
+import {showCartMenu} from '@/redux/shopping-cart-slice';
 const BasketButton = () => {
   const dispatch = useAppDispatch();
   const showCartMenuHandler = () => {
