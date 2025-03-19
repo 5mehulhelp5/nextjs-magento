@@ -1,41 +1,26 @@
 import { gql } from 'graphql-request';
 
-// export type CREATE_CART_QUERY_RESPONSE_TYPE = {
-//     data:{
-// createGuestCart:{
-//     cart:{
-// id:string
-//     }
-// }
-//     }
-// }
 
-interface AddProductToCartArgsType{
+interface AddProductToCartGQLArgsType{
     cart_id:string;
     product_sku:string
 }
-export const addProductToCart=({cart_id,product_sku}:AddProductToCartArgsType)=>{
+export const addProductToCartGQL=({cart_id,product_sku}:AddProductToCartGQLArgsType)=>{
 
     const addProductToCartQuery = `
    mutation {
-  addSimpleProductsToCart(
-    input: {
-      cart_id: "${cart_id}"
-      cart_items: [
-        {
-          data: {
-            quantity: 1,
-            sku: "${product_sku}"
-          }
-        }
+  addProductsToCart(
+    cartId: "${cart_id}"
+      cartItems: [
+       {sku:"${product_sku}",quantity:1}
       ]
-    }
-  ) {
+  ){
     cart {
       id
       items {
         id
         quantity
+         uid
         product {
           name
           sku
@@ -47,10 +32,9 @@ export const addProductToCart=({cart_id,product_sku}:AddProductToCartArgsType)=>
               }
             }
           }
-          media_gallery {
-            url
-            label
-          }
+         image{
+         url
+         }
         }
       }
     }

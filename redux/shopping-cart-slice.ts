@@ -1,4 +1,3 @@
-import { CartItem } from '@/app/api/addProductToCart/route';
 import {ProductCartMenuPropsType} from '@/components/Basket/CartMenu/ProductCartMenu/ProductCartMenu';
 import {createSlice} from '@reduxjs/toolkit';
 
@@ -56,6 +55,23 @@ const shoppingCartSlice = createSlice({
         state.cartProducts=mergedArray
       }
     },
+    updateCartProductQuantity:(state, action: {payload:{array:ProductCartMenuPropsType[]}})=>{
+      console.log(action.payload.array)
+      const mergedArray:ProductCartMenuPropsType[] = action.payload.array.map(newArrayItem=>{
+        const itemExists = state.cartProducts.findIndex(item=>item.product.sku===newArrayItem.product.sku)
+        if(itemExists!==-1){
+          return {
+            ...newArrayItem,link:state.cartProducts[itemExists].link
+          }
+        }
+        else{
+          return {
+            ...newArrayItem,link:""
+          }
+        }
+      })
+      state.cartProducts=mergedArray
+    }
   },
 });
 
@@ -63,4 +79,5 @@ export default shoppingCartSlice.reducer;
 export const showCartMenu = shoppingCartSlice.actions.showCartMenu;
 export const hideCartMenu = shoppingCartSlice.actions.hideCartMenu;
 export const addCartProduct = shoppingCartSlice.actions.addCartProduct;
+export const updateCartProductQuantity = shoppingCartSlice.actions.updateCartProductQuantity;
 export const setCartId = shoppingCartSlice.actions.setCartId;

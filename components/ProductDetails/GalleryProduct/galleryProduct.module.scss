@@ -1,6 +1,7 @@
 .container {
   box-sizing: border-box;
   display: flex;
+  min-width: 50%;
   width: auto;
   min-height: 50vh;
   flex-direction: row;

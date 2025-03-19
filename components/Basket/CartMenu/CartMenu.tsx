@@ -6,6 +6,7 @@ import {hideCartMenu, setCartId} from '@/redux/shopping-cart-slice';
 import ProductCartMenu from './ProductCartMenu/ProductCartMenu';
 import { useEffect, useState } from 'react';
 import { CREATE_CART_QUERY_RESPONSE_TYPE } from '@/graphQl/queries/cart/createCart';
+import { createCart } from '@/components/Api/Cart/cart';
 const CartMenu = () => {
 
   const dispatch = useAppDispatch();
@@ -19,33 +20,30 @@ const cartProducts = useAppSelector(state=>state.shoppingCart.cartProducts)
     const hideCartMenuHandler = () => {
       dispatch(hideCartMenu());
     };
+
+const createCartHandler = async() =>{
+  const cartData = await createCart()
+  dispatch(setCartId(cartData.createGuestCart.cart.id))
+}    
+
   useEffect(()=>{
 
-    const createCart = async()=>{
-      const response = await fetch("/api/createCart", {
-        method: "POST",
-      });
-      const data= await response.json();
-      dispatch(setCartId(data.createGuestCart.cart.id))
-    }
-    
-    
     if(cartId===null){
-    createCart()
-
+    createCartHandler()
     }
    
     
   },[cartId,cartProducts])
 
   if(!show)return null;
+  if(!cartId) return null;
     return (
       <div className={styles.container}>
         <CloseButton color="grey" onClick={hideCartMenuHandler} />
-        {cartMenuProducts.map((product, index) => (
+        {cartMenuProducts.map((productItem, index) => (
           <ProductCartMenu
             key={index}
-            {...product}
+            {...{...productItem,cartId:cartId}}
           />
         ))}
       </div>

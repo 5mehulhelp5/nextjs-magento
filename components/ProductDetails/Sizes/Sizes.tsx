@@ -10,7 +10,8 @@ import {addCartProduct} from '@/redux/shopping-cart-slice';
 import { usePathname } from 'next/navigation';
 import graphQLClient from '@/graphQl/graphQLClient';
 import { NextResponse } from 'next/server';
-import { CartResponse } from '@/app/api/addProductToCart/route';
+import { CartResponse } from '@/app/api/cart/addProductToCart/route';
+import { addProductToCart } from '@/components/Api/Cart/cart';
 
 const Sizes = () => {
   const dispatch = useAppDispatch();
@@ -35,16 +36,16 @@ const pathname = usePathname()
     dispatch(setProductVariant(dataToSet));
   };
 
-const addProductToCart = async(cart_id:string,product_sku:string )=> {
-  const response = await fetch("/api/addProductToCart", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ cart_id, product_sku }),
-  });
+// const addProductToCart = async(cart_id:string,product_sku:string )=> {
+//   const response = await fetch("/api/addProductToCart", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ cart_id, product_sku }),
+//   });
 
-  const data = await response.json();
-  return data
-}
+//   const data = await response.json();
+//   return data
+// }
 
 // const addProductToCartApi = async()=>{
 //       const response = await fetch("/api/addProductToCart", {
