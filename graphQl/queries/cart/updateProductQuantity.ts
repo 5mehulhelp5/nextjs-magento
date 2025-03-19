@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import {gql} from 'graphql-request';
 
 // export type CREATE_CART_QUERY_RESPONSE_TYPE = {
 //     data:{
@@ -10,14 +10,17 @@ import { gql } from 'graphql-request';
 //     }
 // }
 
-interface UpdateProductQuantityArgsType{
-    cart_id:string;
-    cart_item_uid:string;
-    quantity:number
+interface UpdateProductQuantityArgsType {
+  cart_id: string;
+  cart_item_uid: string;
+  quantity: number;
 }
-export const updateProductQuantityGQL=({cart_id,cart_item_uid,quantity}:UpdateProductQuantityArgsType)=>{
-
-    const updateProductQuantityQuery = `
+export const updateProductQuantityGQL = ({
+  cart_id,
+  cart_item_uid,
+  quantity,
+}: UpdateProductQuantityArgsType) => {
+  const updateProductQuantityQuery = `
    mutation {
    updateCartItems(
     input: {
@@ -32,6 +35,12 @@ export const updateProductQuantityGQL=({cart_id,cart_item_uid,quantity}:UpdatePr
   ){
     cart {
       id
+       prices {
+        grand_total{
+          value
+          currency
+        }
+      }
       items {
         id
         quantity
@@ -54,7 +63,6 @@ export const updateProductQuantityGQL=({cart_id,cart_item_uid,quantity}:UpdatePr
       }
     }
   }
-}`
-return updateProductQuantityQuery
-}
- 
+}`;
+  return updateProductQuantityQuery;
+};

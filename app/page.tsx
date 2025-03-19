@@ -5,7 +5,6 @@ import {GET_PRODUCTS_TYPE} from '@/graphQl/queries';
 import {GET_LAST_5_PRODUCTS} from '@/graphQl/queries/products/getProducts';
 
 export default async function Home() {
- 
   const data: GET_PRODUCTS_TYPE =
     await graphQLClient.request(GET_LAST_5_PRODUCTS);
   return (
