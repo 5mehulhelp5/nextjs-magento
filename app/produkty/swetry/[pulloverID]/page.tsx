@@ -13,7 +13,7 @@ import Description from '@/components/ProductDetails/Description/Description';
 import ShortDescription from '@/components/ProductDetails/ShortDescription/ShortDescription';
 import Features from '@/components/ProductDetails/Features/Features';
 import Sizes from '@/components/ProductDetails/Sizes/Sizes';
-import { headers } from 'next/headers';
+import {headers} from 'next/headers';
 
 const PulloverDetailsPage = async ({
   params,
@@ -28,7 +28,8 @@ const PulloverDetailsPage = async ({
   // })
   // const response = await data.json()
   // console.log(response)
-  const sku = params.pulloverID;
+  const paramsReq = await params;
+  const sku = paramsReq.pulloverID;
   const productData: PRODUCT_DETAILS_QUERY_RESPONSE_TYPE =
     await graphQLClient.request(getProductDetails(sku));
   console.log(productData.products.items[0]);

@@ -16,7 +16,7 @@ const SizeProductButton = ({
   selected,
   stock_status,
 }: SizeProductButtonPropsType) => {
-  console.log('selected:', selected, 'id:', id, 'stock_status', stock_status);
+  // console.log('selected:', selected, 'id:', id, 'stock_status', stock_status);
   if (stock_status !== 'IN_STOCK')
     return <button className={styles.outOfStock}>{title}</button>;
   if (selected === null)

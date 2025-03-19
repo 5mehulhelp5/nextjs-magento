@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
         source: '/graphql',
         destination: 'https://srv721099.hstgr.cloud/graphql/', // Twój endpoint GraphQL
       },
-    ]
+    ];
   },
   images: {
     remotePatterns: [

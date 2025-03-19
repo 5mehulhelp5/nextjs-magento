@@ -1,17 +1,58 @@
-.container{
+@use '../../../../styles/colors.scss' as colors;
+.container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  height: 160px;
+}
+.image {
+  width: 30%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+.detailsBox {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  gap: 0.3rem;
+}
+.buttonsBox {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2rem;
+  border: 2px solid colors.$sand;
+  width: fit-content;
+  .quantity {
     box-sizing: border-box;
+    width: 40px;
+    height: 40px;
     display: flex;
-    flex-direction: row;
-    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    // border-top: 2px solid colors.$sand;
+    // border-bottom:2px solid colors.$sand;
+    font-weight: 600;
+  }
+  .button {
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+    background-color: transparent;
+    border: none;
+    transition: all 0.3s;
+    // border: 2px solid colors.$sand;
+    &:hover {
+      cursor: pointer;
+      background-color: colors.$sand;
+      color: white;
+    }
+  }
 }
-.image{
-    width: 30%;
-    height: auto;
-    object-fit: cover;
-    object-position: center;
-}
-.detailsBox{
-    display: flex;
-    flex-direction: column;
-    width: auto;
+.errorMessage {
+  font-size: 1rem;
+  color: red;
 }
