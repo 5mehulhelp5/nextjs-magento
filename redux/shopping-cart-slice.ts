@@ -80,6 +80,7 @@ const shoppingCartSlice = createSlice({
           });
         state.cartProducts = mergedArray;
       }
+      state.prices=action.payload.prices
     },
     updateCartProductQuantity: (
       state,

@@ -44,6 +44,7 @@ const Sizes = () => {
       sizesVariants[selected].product.sku
     );
     if (!cartResponse) return;
+    console.log('CART_RESPONSE:',cartResponse)
     const cartItems = cartResponse.cart_items;
     const prices = cartResponse.prices
     dispatch(addCartProduct({cart_items: cartItems,prices:prices, link: pathname}));

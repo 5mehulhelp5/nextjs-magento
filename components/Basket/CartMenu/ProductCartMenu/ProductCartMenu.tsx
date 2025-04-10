@@ -54,7 +54,7 @@ const ProductCartMenu = (product: ProductCartMenuExtendedPropsType) => {
     }
   };
 
-  const decreaseQuantityHaandler = async () => {
+  const decreaseQuantityHandler = async () => {
     const newQuantity = quantity - 1;
     const apiResponse = await updateProductQuantity(
       cart_id,
@@ -84,7 +84,7 @@ const ProductCartMenu = (product: ProductCartMenuExtendedPropsType) => {
           {attrribute.label}: {attrribute.value}
         </span>
         <div className={styles.buttonsBox}>
-          <button className={styles.button} onClick={decreaseQuantityHaandler}>
+          <button className={styles.button} onClick={decreaseQuantityHandler}>
             -
           </button>
           <span className={styles.quantity}>{quantity}</span>

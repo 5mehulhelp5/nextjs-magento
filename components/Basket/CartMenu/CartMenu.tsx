@@ -7,6 +7,7 @@ import ProductCartMenu from './ProductCartMenu/ProductCartMenu';
 import {useEffect, useState} from 'react';
 import {CREATE_CART_QUERY_RESPONSE_TYPE} from '@/graphQl/queries/cart/createCart';
 import {createCart} from '@/components/Api/Cart/cart';
+import ButtonLink from '@/components/Ui/Links/ButtonLink/ButtonLink';
 const CartMenu = () => {
   const dispatch = useAppDispatch();
 
@@ -32,7 +33,7 @@ const CartMenu = () => {
     if (cartId === null) {
       createCartHandler();
     }
-  }, [cartId, cartProducts]);
+  }, [cartId, cartProducts,totalPrice]);
 
   if (!show) return null;
   if (!cartId) return null;
@@ -45,6 +46,7 @@ const CartMenu = () => {
       ))}
       </div>
       <div className={styles.sumBox}><span>Przewidywana suma</span><span>{totalPrice.grand_total.value} {totalPrice.grand_total.currency}</span></div>
+    <ButtonLink title='Zobacz koszyk' url='/cart'/>
     </div>
   );
 };
