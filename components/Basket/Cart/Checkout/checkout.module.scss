@@ -1,0 +1,24 @@
+@use '../../../../styles/colors.scss' as colors;
+.container{
+    box-sizing: border-box;
+display: flex;
+flex-direction: column;
+align-items: center;
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+   justify-content: flex-end;
+   gap: 1rem;
+   background-color: colors.$sand;
+   
+}
+.screenContainer{
+    width: 90%;
+    height: 80vh;
+    background-color: white;
+}
+.checkoutProgressBox{
+    width: 90%;
+    height: 10vh;
+    background-color: green;backdrop-filter: blur(200px);
+}

@@ -45,8 +45,12 @@ const CartMenu = () => {
         <ProductCartMenu key={index} {...{...productItem, cartId: cartId}} />
       ))}
       </div>
+      <div className={styles.bottomBox}>
       <div className={styles.sumBox}><span>Przewidywana suma</span><span>{totalPrice.grand_total.value} {totalPrice.grand_total.currency}</span></div>
-    <ButtonLink title='Zobacz koszyk' url='/cart'/>
+      <ButtonLink onClick={hideCartMenuHandler} title='Zobacz koszyk' url='/cart'/>
+
+      </div>
+     
     </div>
   );
 };

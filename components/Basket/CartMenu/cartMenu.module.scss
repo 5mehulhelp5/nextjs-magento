@@ -21,11 +21,27 @@
   height: 80vh;
   gap: .5rem;
 }
+.bottomBox{
+  box-sizing: border-box;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 450px;
+  height: 13vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1rem;
+}
 .sumBox{
+ 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  
 }
 @keyframes slideIn {
   from {

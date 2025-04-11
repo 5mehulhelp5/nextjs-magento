@@ -4,13 +4,14 @@ import styles from './buttonLink.module.scss'
 
 interface ButtonLinkPropsType{
     title:string,
-    url:string
+    url:string,
+    onClick?:()=>void;
 }
 
 
-const ButtonLink=({title,url}:ButtonLinkPropsType)=>{
+const ButtonLink=({title,url,onClick}:ButtonLinkPropsType)=>{
 
-    return <Link className={styles.button} href={url}>{title}</Link>
+    return <Link onClick={onClick} className={styles.button} href={url}>{title}</Link>
 }
 
 export default ButtonLink
