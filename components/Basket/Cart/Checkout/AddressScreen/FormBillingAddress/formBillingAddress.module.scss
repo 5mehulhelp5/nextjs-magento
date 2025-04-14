@@ -5,6 +5,7 @@
     flex-direction: column;
     width: 45%;
     gap: 2rem;
+    border-right: 2px solid colors.$sand;
 }
 .inputBox{
     display: flex;
@@ -59,6 +60,8 @@ box-shadow: 1px 1px 2px 1px black;
 }
 .form{
     width: 100%;
+    padding-right: 2rem;
+    box-sizing: border-box;
     
 }
 .rowBox{

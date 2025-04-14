@@ -17,7 +17,7 @@ const deliveryAddressDiffAsBillingHandler = ()=>{
 }
     return <div className={styles.container}>
         <FormBillingAddress deliveryAddressSameAsBilling={deliveryAddressSameAsBilling} onDeliveryAddressSameAsBilling={deliveryAddressSameAsBillingHandler} onDeliveryAddressDiffAsBilling={deliveryAddressDiffAsBillingHandler}/>
-        <FormDeliveryAddress/>
+        <FormDeliveryAddress showForm={deliveryAddressSameAsBilling}/>
     </div>
 }
 

@@ -9,6 +9,32 @@ interface CartPricesGrandTotal{
     };
   
 }
+export interface ShippingAddressType {
+  firstname: string;
+  lastname: string;
+  company: string;
+  street: string[];
+  city: string;
+  region: {
+    code: string;
+    label: string;
+  };
+  postcode: string;
+  telephone: string;
+  country: {
+    code: string;
+    label: string;
+  };
+  available_shipping_methods: ShippingMethodType[];
+}
+
+export interface ShippingMethodType {
+  carrier_code: string;
+  carrier_title: string;
+  method_code: string;
+  method_title: string;
+}
+
 
 const SHOPPING_CART_INITIAL_STATE: {
   showCartMenu: boolean;

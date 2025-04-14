@@ -1,6 +1,8 @@
 'use client'
 import { ChangeEvent, useState } from 'react'
 import styles from './formBillingAddress.module.scss'
+import { setDeliveryAddress } from '@/components/Api/Cart/checkout';
+import { useAppSelector } from '@/redux/hooks';
 
 interface FormBillingAddressPropsType{
     deliveryAddressSameAsBilling:boolean,
@@ -11,6 +13,8 @@ interface FormBillingAddressPropsType{
 
 const FormBillingAddress=({deliveryAddressSameAsBilling,onDeliveryAddressDiffAsBilling,onDeliveryAddressSameAsBilling}:FormBillingAddressPropsType)=>{
 
+const cart_id = useAppSelector(state=>state.shoppingCart.cartId)
+
     const [checkBox,setCheckBox]=useState(true)
 const [formData,setFormData] = useState({
 firstname:{
@@ -20,7 +24,7 @@ firstname:{
     },
     value:""
 },
-secondname:{
+lastname:{
     error:{
         status:false,
         message:""
@@ -78,9 +82,9 @@ setFormData((prevState=>({...prevState,firstname:{
     ...prevState.firstname,value:e.target.value
 }})))
 }
-const secondnameOnChangeHandler = (e:ChangeEvent<HTMLInputElement>)=>{
-    setFormData((prevState=>({...prevState,secondname:{
-        ...prevState.secondname,value:e.target.value
+const lastnameOnChangeHandler = (e:ChangeEvent<HTMLInputElement>)=>{
+    setFormData((prevState=>({...prevState,lastname:{
+        ...prevState.lastname,value:e.target.value
     }})))
     }
 const streetOnChangeHandler = (e:ChangeEvent<HTMLInputElement>)=>{
@@ -107,7 +111,29 @@ const streetOnChangeHandler = (e:ChangeEvent<HTMLInputElement>)=>{
                         setFormData((prevState=>({...prevState,telephone:{
                             ...prevState.telephone,value:e.target.value
                         }})))
-                        }
+}
+
+const submitHandler = async()=>{
+    
+    const dataToSend = {
+        firstname:formData.firstname.value,
+        lastname:formData.lastname.value,
+        country_code:formData.country_code.value,
+        street:formData.street.value,
+        postcode:formData.postcode.value,
+        city:formData.city.value,
+        email:formData.email.value,
+        telephone:formData.telephone.value
+    }
+    if(cart_id){
+        const {firstname,lastname,country_code,street,postcode,city,email,telephone} = dataToSend
+        const response = await setDeliveryAddress({cart_id,firstname,lastname,country_code,street,postcode,city,email,telephone})
+        const data = response?.data
+        console.log(data)
+    }
+    
+}
+
     return <div className={styles.container}>
         <h2>Dane do płatności</h2>
         <form className={styles.form}>
@@ -117,8 +143,8 @@ const streetOnChangeHandler = (e:ChangeEvent<HTMLInputElement>)=>{
             <input name='firstname' onChange={(e)=>firstnameOnChangeHandler(e)} value={formData.firstname.value} minLength={3} type='text'/>
         </div>
         <div className={styles.inputBox}>
-            <label htmlFor='secondname'>NAZWISKO</label>
-            <input name='secondname'  onChange={(e)=>secondnameOnChangeHandler(e)} value={formData.secondname.value} minLength={3} type='text'/>
+            <label htmlFor='lastname'>NAZWISKO</label>
+            <input name='lastname'  onChange={(e)=>lastnameOnChangeHandler(e)} value={formData.lastname.value} minLength={3} type='text'/>
         </div>
             </div>
             <div className={styles.inputBox}>
@@ -155,7 +181,7 @@ const streetOnChangeHandler = (e:ChangeEvent<HTMLInputElement>)=>{
 <span className={styles.circle}></span>
         </button>
         <label htmlFor='billingAdressSameAsDelivery'>Adres dostawy taki sam jak płatności</label></div>
-    
+    <button onClick={submitHandler}>Submit</button>
     </div>
 }
 
