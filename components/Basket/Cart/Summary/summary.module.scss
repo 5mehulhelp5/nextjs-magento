@@ -1,25 +1,25 @@
 @use '../../../../styles/colors.scss' as colors;
-.container{
-    position: fixed;
-    height: 90vh;
-    right: 0;
-    top: 10vh;
-    width: 40%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 10rem 2rem 3rem;
-    border-left:2px solid colors.$sand;
-    gap: 2rem;
+.container {
+  position: fixed;
+  height: 90vh;
+  right: 0;
+  top: 10vh;
+  width: 40%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 10rem 2rem 3rem;
+  border-left: 2px solid colors.$sand;
+  gap: 2rem;
 }
-.details{
-    display: flex;
-    flex-direction: column;
+.details {
+  display: flex;
+  flex-direction: column;
 }
-.rowBox{
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    padding: .5rem 0;
-    justify-content: space-between;
+.rowBox {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem 0;
+  justify-content: space-between;
 }

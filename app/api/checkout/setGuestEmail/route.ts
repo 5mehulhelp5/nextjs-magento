@@ -1,14 +1,13 @@
-import {setDeliveryAddressGQL} from '@/graphQl/queries/cart/setDeliveryAddress';
-import {DeliveryAddressType} from '@/redux/shopping-cart-slice';
+import { setGuestEmailOnCartGQL } from '@/graphQl/queries/cart/setGuestEmailOnCart';
 import {NextResponse} from 'next/server';
 
 const MAGENTO_GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT as string;
 
 interface CartResponse {
   data: {
-    setShippingAddressesOnCart: {
+    setGuestEmailOnCart: {
       cart: {
-        shipping_addresses: DeliveryAddressType[];
+        email: string;
       };
     };
   };
@@ -18,23 +17,11 @@ export async function POST(req: Request) {
   try {
     const {
       cart_id,
-      city,
-      country_code,
-      firstname,
-      lastname,
-      telephone,
-      street,
-      postcode,
+      email
     } = await req.json();
-    const mutation = setDeliveryAddressGQL({
+    const mutation = setGuestEmailOnCartGQL({
       cart_id,
-      city,
-      country_code,
-      firstname,
-      lastname,
-      telephone,
-      street,
-      postcode,
+      email
     });
     // console.log(mutation)
     const response = await fetch(MAGENTO_GRAPHQL_ENDPOINT, {
@@ -46,10 +33,9 @@ export async function POST(req: Request) {
     });
 
     const data: CartResponse = await response.json();
-    console.log(data);
     return NextResponse.json(data);
   } catch (error) {
     console.log(error);
-    return NextResponse.json({error: 'Error adding product'}, {status: 500});
+    return NextResponse.json({error: 'Error setting email'}, {status: 500});
   }
 }

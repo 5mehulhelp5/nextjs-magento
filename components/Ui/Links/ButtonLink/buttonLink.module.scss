@@ -1,8 +1,8 @@
 @use '../../../../styles/colors.scss' as colors;
-.button{
-    background-color: transparent;
+.button {
+  background-color: transparent;
   font-size: 1.3rem;
-  padding: .5rem 2rem;
+  padding: 0.5rem 2rem;
   min-width: 5rem;
   font-weight: 500;
   border: 2px solid colors.$sand;

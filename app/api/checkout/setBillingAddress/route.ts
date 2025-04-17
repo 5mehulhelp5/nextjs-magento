@@ -1,14 +1,14 @@
-import {setDeliveryAddressGQL} from '@/graphQl/queries/cart/setDeliveryAddress';
-import {DeliveryAddressType} from '@/redux/shopping-cart-slice';
+import {setBillingAddressGQL} from '@/graphQl/queries/cart/setBillingAddress';
+import {BillingAddressType} from '@/redux/shopping-cart-slice';
 import {NextResponse} from 'next/server';
 
 const MAGENTO_GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT as string;
 
 interface CartResponse {
   data: {
-    setShippingAddressesOnCart: {
+    setBillingAddressOnCart: {
       cart: {
-        shipping_addresses: DeliveryAddressType[];
+        billing_address: BillingAddressType;
       };
     };
   };
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       street,
       postcode,
     } = await req.json();
-    const mutation = setDeliveryAddressGQL({
+    const mutation = setBillingAddressGQL({
       cart_id,
       city,
       country_code,
@@ -46,7 +46,6 @@ export async function POST(req: Request) {
     });
 
     const data: CartResponse = await response.json();
-    console.log(data);
     return NextResponse.json(data);
   } catch (error) {
     console.log(error);
