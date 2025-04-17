@@ -44,7 +44,12 @@ const ProductCartMenu = (product: ProductCartMenuExtendedPropsType) => {
     );
     if (!apiResponse) return;
     if (!apiResponse.error.status && apiResponse.data !== null) {
-      dispatch(updateCartProductQuantity({cart_items: apiResponse.data.cart_items,prices:apiResponse.data.prices}));
+      dispatch(
+        updateCartProductQuantity({
+          cart_items: apiResponse.data.cart_items,
+          prices: apiResponse.data.prices,
+        })
+      );
     }
     if (apiResponse.error.status) {
       setQtyError({status: true, message: apiResponse.error.message});
@@ -63,7 +68,12 @@ const ProductCartMenu = (product: ProductCartMenuExtendedPropsType) => {
     );
     if (!apiResponse) return;
     if (!apiResponse.error.status && apiResponse.data !== null) {
-      dispatch(updateCartProductQuantity({cart_items: apiResponse.data.cart_items,prices:apiResponse.data.prices}));
+      dispatch(
+        updateCartProductQuantity({
+          cart_items: apiResponse.data.cart_items,
+          prices: apiResponse.data.prices,
+        })
+      );
     }
     if (apiResponse.error.status) {
       setQtyError({status: true, message: apiResponse.error.message});

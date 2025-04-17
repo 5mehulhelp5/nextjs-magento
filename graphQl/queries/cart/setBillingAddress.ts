@@ -1,4 +1,4 @@
-interface SetDeliveryAddressArgsType {
+interface SetBillingAddressArgsType {
   cart_id: string;
   firstname: string;
   lastname: string;
@@ -9,7 +9,7 @@ interface SetDeliveryAddressArgsType {
   telephone: string;
 }
 
-export const setDeliveryAddressGQL = ({
+export const setBillingAddressGQL = ({
   cart_id,
   firstname,
   lastname,
@@ -18,13 +18,13 @@ export const setDeliveryAddressGQL = ({
   postcode,
   country_code,
   telephone,
-}: SetDeliveryAddressArgsType) => {
-  const setDeliveryAddressQuery = `
+}: SetBillingAddressArgsType) => {
+  const setBillingAddressQuery = `
    mutation {
-  setShippingAddressesOnCart(
+  setBillingAddressOnCart(
     input: {
       cart_id: "${cart_id}"
-      shipping_addresses: [
+     billing_address: 
         {
           address: {
             firstname: "${firstname}"
@@ -40,11 +40,11 @@ export const setDeliveryAddressGQL = ({
             save_in_address_book: false
           }
         }
-      ]
+      
     }
   ) {
     cart {
-      shipping_addresses {
+      billing_address {
         firstname
         lastname
         company
@@ -60,16 +60,10 @@ export const setDeliveryAddressGQL = ({
           code
           label
         }
-        available_shipping_methods{
-          carrier_code
-          carrier_title
-          method_code
-          method_title
-        }
       }
     }
   }
 }
 `;
-  return setDeliveryAddressQuery;
+  return setBillingAddressQuery;
 };

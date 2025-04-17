@@ -1,24 +1,42 @@
 @use '../../../../styles/colors.scss' as colors;
-.container{
-    box-sizing: border-box;
-display: flex;
-flex-direction: column;
-align-items: center;
-    width: 100%;
-    height: 100vh;
-    padding: 2rem;
-   justify-content: flex-end;
-   gap: 1rem;
-   background-color: colors.$sand;
-   
+.container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding: 2rem;
+  justify-content: flex-end;
+  gap: 1rem;
+  background-color: colors.$sand;
 }
-.screenContainer{
-    width: 90%;
-    height: 80vh;
-    background-color: white;
+.screenContainer {
+  width: 90%;
+  height: 80vh;
+  background-color: white;
 }
-.checkoutProgressBox{
-    width: 90%;
-    height: 10vh;
-    background-color: green;backdrop-filter: blur(200px);
+.checkoutProgressBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  height: 10vh;
+  background-color: gray;
+  backdrop-filter: blur(200px);
+  border:2px solid white;
+  .box{
+    display: flex;
+    font-size: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    padding: 1rem;
+    // background-color: colors.$sand;
+    border: 2px solid white;
+  }
+  .active{
+    background-color: colors.$sand;
+  }
 }
+
