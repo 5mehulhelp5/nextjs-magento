@@ -14,14 +14,16 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <StoreProvider>
+    
       <html lang="en">
         <body>
+        <StoreProvider>
           <NavigationBar />
           <CartMenu />
           {children}
+          </StoreProvider>
         </body>
       </html>
-    </StoreProvider>
+    
   );
 }
