@@ -61,10 +61,14 @@ export const setDeliveryAddressGQL = ({
           label
         }
         available_shipping_methods{
-          carrier_code
-          carrier_title
-          method_code
-          method_title
+           carrier_code
+  carrier_title
+  method_code
+  method_title
+  amount {
+    value
+    currency
+  }
         }
       }
     }

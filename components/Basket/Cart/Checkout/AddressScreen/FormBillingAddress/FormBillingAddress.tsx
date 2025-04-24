@@ -16,6 +16,8 @@ import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 interface FormBillingAddressPropsType {
   deliveryAddressSameAsBilling: boolean;
   submit: boolean;
+  onOkBillingFormStatus:()=>void;
+  onOkDeliveryFormStatus:()=>void;
   onDeliveryAddressSameAsBilling: (
     deliveryAddressSameAsBilling: boolean
   ) => void;
@@ -27,10 +29,14 @@ const FormBillingAddress = ({
   submit,
   deliveryAddressSameAsBilling,
   onResetSubmit,
-  onDeliveryAddressSameAsBilling,
+  onDeliveryAddressSameAsBilling,onOkBillingFormStatus,onOkDeliveryFormStatus
 }: FormBillingAddressPropsType) => {
+
   const dispatch = useAppDispatch();
-  const cart_id = useAppSelector((state) => state.shoppingCart.cartId);
+  const shoppingCartStore = useAppSelector(state=>state.shoppingCart)
+  const cart_id = shoppingCartStore.cartId
+const billingAddressStore = shoppingCartStore.billingAddress
+const guestEmailStore = shoppingCartStore.guestEmail
 
   const [formData, setFormData] = useState({
     firstname: {
@@ -38,58 +44,59 @@ const FormBillingAddress = ({
         status: false,
         message: '',
       },
-      value: '',
+      value: billingAddressStore.firstname,
     },
     lastname: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: billingAddressStore.lastname,
     },
     country_code: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: billingAddressStore.country.code,
     },
     street: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: billingAddressStore.street[0],
     },
     postcode: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: billingAddressStore.postcode,
     },
     city: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: billingAddressStore.city,
     },
     email: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: guestEmailStore,
     },
     telephone: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: billingAddressStore.telephone,
     },
   });
+
 
   const switchStyles = `${styles.switch} ${deliveryAddressSameAsBilling && styles.checked}`;
 const firstNameInputStyles = formData.firstname.error.status?styles.inputError:"";
@@ -123,6 +130,8 @@ const telephoneInputStyles = formData.telephone.error.status?styles.inputError:"
         }
     }
   };
+
+
   const lastnameOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -145,6 +154,8 @@ const telephoneInputStyles = formData.telephone.error.status?styles.inputError:"
         }
     }
   };
+
+
   const streetOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -167,6 +178,8 @@ const telephoneInputStyles = formData.telephone.error.status?styles.inputError:"
         }
     }
   };
+
+
   const postcodeOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -189,6 +202,8 @@ const telephoneInputStyles = formData.telephone.error.status?styles.inputError:"
         }
     }
   };
+
+
   const cityOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -211,6 +226,8 @@ const telephoneInputStyles = formData.telephone.error.status?styles.inputError:"
         }
     }
   };
+
+
   const emailOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -233,6 +250,8 @@ const telephoneInputStyles = formData.telephone.error.status?styles.inputError:"
         }
     }
   };
+
+
   const telephoneOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -285,7 +304,7 @@ if(firstname.length<3){
 if(lastname.length<3){
     formData.lastname.error.status=true
 }
-if(street.length<3){
+if(street&&street.length<3){
     formData.street.error.status=true
 }
 if(postcode.length!==6){
@@ -303,6 +322,7 @@ if(telephone.length<9){
 
 const formDataArray = Object.values(formData).map(item=>item.error.status)
 const hasErrors = formDataArray.find(item=>item===true)
+
 if(hasErrors)return;
       const response = await setBillingAddress({
         cart_id,
@@ -328,6 +348,9 @@ if(hasErrors)return;
       if(emailData){
         dispatch(setGuestEmailDispatch(emailData.setGuestEmailOnCart.cart.email))
       }
+      if(data&&emailData){
+        onOkBillingFormStatus()
+      }
       if (deliveryAddressSameAsBilling) {
         const response = await setDeliveryAddress({
           cart_id,
@@ -342,14 +365,15 @@ if(hasErrors)return;
         });
         const data = response?.data;
         if (data) {
+          console.log(data,'delivery')
           dispatch(
             setDeliveryAddressDispatch(
               data.setShippingAddressesOnCart.cart.shipping_addresses[0]
             )
           );
+          onOkDeliveryFormStatus()
         }
       }
-      console.log('COMPONENT DATA RESP', data);
     }
   };
   useEffect(() => {

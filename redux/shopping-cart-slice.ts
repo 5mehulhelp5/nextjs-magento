@@ -73,7 +73,7 @@ const SHOPPING_CART_INITIAL_STATE: {
     firstname: '',
     lastname: '',
     company: '',
-    street: [],
+    street: [""],
     city: '',
     region: {
       code: '',
@@ -91,7 +91,7 @@ const SHOPPING_CART_INITIAL_STATE: {
     firstname: '',
     lastname: '',
     company: '',
-    street: [],
+    street: [""],
     city: '',
     region: {
       code: '',
