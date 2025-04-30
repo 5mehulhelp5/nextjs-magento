@@ -1,4 +1,4 @@
-import { BillingAddressType, DeliveryAddressType } from '@/redux/shopping-cart-slice';
+import { BillingAddressType, CartPricesGrandTotal, DeliveryAddressType, DeliveryMethodType } from '@/redux/shopping-cart-slice';
 
 interface SetDeliveryAddressPropsType{
     cart_id: string,
@@ -18,6 +18,28 @@ type SetDeliveryAddressType = ({}:SetDeliveryAddressPropsType)=>
            setShippingAddressesOnCart: {
              cart: {
                shipping_addresses: DeliveryAddressType[];
+             };
+           };
+         }
+} | undefined>
+
+interface SetDeliveryMethodPropsType{
+  cart_id: string;
+  carrier_code:string,
+  method_code:string
+}
+
+type SetDeliveryMethodType = ({}:SetDeliveryMethodPropsType)=>
+  Promise<
+{ 
+    data: {
+      setShippingMethodsOnCart
+      : {
+             cart: {
+              prices:CartPricesGrandTotal,
+               shipping_addresses: {
+                selected_shipping_method:DeliveryMethodType
+                }[];
              };
            };
          }
@@ -74,6 +96,18 @@ export const setDeliveryAddress:SetDeliveryAddressType= async( {cart_id,city,cou
       
         const data = await response.json();
         return data
+}
+
+export const setDeliveryMethod:SetDeliveryMethodType= async( {cart_id,carrier_code,method_code} )=> {
+  
+  const response = await fetch("/api/checkout/setDeliveryMethod", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ cart_id,carrier_code,method_code }),
+  });
+
+  const data = await response.json();
+  return data
 }
 
 export const setBillingAddress:SetBillingAddressType= async( {cart_id,city,country_code,firstname,lastname,telephone,street,postcode,email} )=> {

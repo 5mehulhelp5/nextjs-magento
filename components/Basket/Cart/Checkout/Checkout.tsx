@@ -6,6 +6,7 @@ import DeliveryScreen from './DeliveryScreen/DeliveryScreen';
 import { useAppSelector } from '@/redux/hooks';
 
 const Checkout = () => {
+  const cart_id = useAppSelector(state=>state.shoppingCart.cartId)
   const [screens, setScreens] = useState({
     addressScreen: {
       show: true,
@@ -53,6 +54,7 @@ const showDeliveryScreenHandler = () =>{
 
 const addressStyles = screens.addressScreen.show?`${styles.box} ${styles.active}`:styles.box
 const deliveryStyles = screens.deliveryScreen.show?`${styles.box} ${styles.active}`:styles.box
+if(cart_id){
   return (
     <div className={styles.container}>
       <div className={styles.checkoutProgressBox}>
@@ -77,6 +79,8 @@ const deliveryStyles = screens.deliveryScreen.show?`${styles.box} ${styles.activ
       </div>
     </div>
   );
+}
+ return null 
 };
 
 export default Checkout;
