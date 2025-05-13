@@ -17,7 +17,12 @@ const FormDeliveryAddress = ({
   onResetSubmit,
 }: FormDeliveryAddressPropsType) => {
   const dispatch = useAppDispatch();
-  const cart_id = useAppSelector((state) => state.shoppingCart.cartId);
+
+const shoppingCartStore = useAppSelector(state=>state.shoppingCart)
+const cart_id = shoppingCartStore.cartId;
+const deliveryAddressStore = shoppingCartStore.deliveryAddress;
+const guestEmailStore = shoppingCartStore.guestEmail
+
 
   const [formData, setFormData] = useState({
     firstname: {
@@ -25,56 +30,56 @@ const FormDeliveryAddress = ({
         status: false,
         message: '',
       },
-      value: '',
+      value: deliveryAddressStore.firstname,
     },
     lastname: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: deliveryAddressStore.lastname,
     },
     country_code: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: deliveryAddressStore.country.code,
     },
     street: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: deliveryAddressStore.street[0],
     },
     postcode: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: deliveryAddressStore.postcode,
     },
     city: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: deliveryAddressStore.city,
     },
     email: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: guestEmailStore,
     },
     telephone: {
       error: {
         status: false,
         message: '',
       },
-      value: '',
+      value: deliveryAddressStore.telephone,
     },
   });
 
@@ -270,7 +275,7 @@ const telephoneInputStyles = formData.telephone.error.status?styles.inputError:"
     if(lastname.length<3){
         formData.lastname.error.status=true
     }
-    if(street.length<3){
+    if(street&&street.length<3){
         formData.street.error.status=true
     }
     if(postcode.length!==6){
@@ -300,6 +305,7 @@ if(hasErrors)return;
         telephone,
       });
       const data = response?.data;
+      console.log('!!!!!!!!!!!!!!!!',data)
       if (data) {
         dispatch(
           setDeliveryAddressDispatch(

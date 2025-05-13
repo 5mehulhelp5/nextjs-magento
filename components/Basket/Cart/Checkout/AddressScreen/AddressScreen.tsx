@@ -19,6 +19,23 @@ const AddressScreen = ({onComplete}: AddressScreenPropsType) => {
   const [deliveryAddressSameAsBilling, setDeliveryAddressSameAsBilling] =
     useState(true);
   const [submit, setSubmit] = useState(false);
+  const [formsStatus,setFormsStatus]= useState({
+    deliveryFormOk:false,
+    billingFormOk:false
+  })
+
+  const setOkDeliveryFormStatusHandler=()=>{
+    setFormsStatus((prevState=>({
+      ...prevState,deliveryFormOk:true
+    })))
+  }
+
+  const setOkBillingFormStatusHandler=()=>{
+    setFormsStatus((prevState=>({
+      ...prevState,billingFormOk:true
+    })))
+  }
+
   const deliveryAddressSameAsBillingHandler = (
     deliveryAddressSameAsBilling: boolean
   ) => {
@@ -34,16 +51,19 @@ const AddressScreen = ({onComplete}: AddressScreenPropsType) => {
   };
 
   useEffect(() => {
-    if (deliveryFirstname !== '' && billingFirstname !== '') {
+    console.log(formsStatus)
+    if (formsStatus.billingFormOk && formsStatus.deliveryFormOk) {
       onComplete();
     }
-  }, [deliveryFirstname, billingFirstname]);
+  }, [formsStatus]);
   return (
     <div className={styles.container}>
       <div className={styles.rowBox}>
         <FormBillingAddress
           submit={submit}
           onResetSubmit={resetSubmitHandler}
+          onOkBillingFormStatus={setOkBillingFormStatusHandler}
+          onOkDeliveryFormStatus={setOkDeliveryFormStatusHandler}
           deliveryAddressSameAsBilling={deliveryAddressSameAsBilling}
           onDeliveryAddressSameAsBilling={deliveryAddressSameAsBillingHandler}
         />

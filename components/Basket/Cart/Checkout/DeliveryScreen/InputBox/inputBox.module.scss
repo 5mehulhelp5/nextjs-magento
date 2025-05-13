@@ -1,0 +1,42 @@
+.container{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid black;
+    padding: 1rem 1rem 1rem 3rem;
+    justify-content: space-between;
+    width: 100%;
+    &:hover{
+        cursor: pointer;
+    }
+}
+.icon{
+    width: 80px;
+}
+.leftBox{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+.priceBox{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    font-weight: bold;
+}
+.selectCircle{
+    width: 30px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+.selectedCircle{
+    width: 30px;
+    height: 30px;
+    border: 2px solid black;
+    background-color: red;
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 0px 5px black;
+}

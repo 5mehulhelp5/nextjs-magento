@@ -1,7 +1,7 @@
 import {ProductCartMenuPropsType} from '@/components/Basket/CartMenu/ProductCartMenu/ProductCartMenu';
 import {createSlice} from '@reduxjs/toolkit';
 
-interface CartPricesGrandTotal {
+export interface CartPricesGrandTotal {
   grand_total: {
     value: number;
     currency: string;
@@ -44,10 +44,19 @@ export interface BillingAddressType {
 }
 
 export interface DeliveryMethodType {
-  carrier_code: string;
+  carrier_code: "inpostcourier"|"inpostlocker";
   carrier_title: string;
   method_code: string;
   method_title: string;
+  amount:{
+    value:number;
+    currency:string;
+  }
+}
+
+export type AvailablePaymentMethodType ={
+  code:string,
+  title:string
 }
 
 const SHOPPING_CART_INITIAL_STATE: {
@@ -59,6 +68,8 @@ const SHOPPING_CART_INITIAL_STATE: {
   deliveryAddress: DeliveryAddressType;
   billingAddress: BillingAddressType;
   guestEmail:string;
+  selectedDeliveryMethod:DeliveryMethodType|null,
+  available_payment_methods:AvailablePaymentMethodType[]|null
 } = {
   showCartMenu: false,
   cartProducts: [],
@@ -73,7 +84,7 @@ const SHOPPING_CART_INITIAL_STATE: {
     firstname: '',
     lastname: '',
     company: '',
-    street: [],
+    street: [""],
     city: '',
     region: {
       code: '',
@@ -91,7 +102,7 @@ const SHOPPING_CART_INITIAL_STATE: {
     firstname: '',
     lastname: '',
     company: '',
-    street: [],
+    street: [""],
     city: '',
     region: {
       code: '',
@@ -104,7 +115,9 @@ const SHOPPING_CART_INITIAL_STATE: {
       label: '',
     },
   },
-  guestEmail:""
+available_payment_methods:null,
+  guestEmail:"",
+  selectedDeliveryMethod:null
 };
 
 const shoppingCartSlice = createSlice({
@@ -205,6 +218,15 @@ const shoppingCartSlice = createSlice({
       state.cartProducts = mergedArray;
       state.prices = action.payload.prices;
     },
+    setSelectedDeliveryMethod:(state,action:{
+      payload:{
+        selected_shipping_method:DeliveryMethodType,
+        prices:CartPricesGrandTotal
+      }
+    })=>{
+state.prices=action.payload.prices;
+state.selectedDeliveryMethod = action.payload.selected_shipping_method
+    }
   },
 });
 
@@ -218,3 +240,4 @@ export const setCartId = shoppingCartSlice.actions.setCartId;
 export const setDeliveryAddress = shoppingCartSlice.actions.setDeliveryAddress;
 export const setBillingAddress = shoppingCartSlice.actions.setBillingAddress;
 export const setGuestEmail = shoppingCartSlice.actions.setGuestEmail
+export const setSelectedDeliveryMethod = shoppingCartSlice.actions.setSelectedDeliveryMethod
