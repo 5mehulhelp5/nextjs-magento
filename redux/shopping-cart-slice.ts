@@ -54,6 +54,11 @@ export interface DeliveryMethodType {
   }
 }
 
+export type AvailablePaymentMethodType ={
+  code:string,
+  title:string
+}
+
 const SHOPPING_CART_INITIAL_STATE: {
   showCartMenu: boolean;
   // cartProducts: ProductCartMenuPropsType[];
@@ -63,7 +68,8 @@ const SHOPPING_CART_INITIAL_STATE: {
   deliveryAddress: DeliveryAddressType;
   billingAddress: BillingAddressType;
   guestEmail:string;
-  selectedDeliveryMethod:DeliveryMethodType|null
+  selectedDeliveryMethod:DeliveryMethodType|null,
+  available_payment_methods:AvailablePaymentMethodType[]|null
 } = {
   showCartMenu: false,
   cartProducts: [],
@@ -109,6 +115,7 @@ const SHOPPING_CART_INITIAL_STATE: {
       label: '',
     },
   },
+available_payment_methods:null,
   guestEmail:"",
   selectedDeliveryMethod:null
 };

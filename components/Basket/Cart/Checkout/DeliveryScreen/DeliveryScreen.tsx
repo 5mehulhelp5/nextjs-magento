@@ -5,8 +5,11 @@ import InputBox from './InputBox/InputBox';
 import { useState } from 'react';
 import { DeliveryMethodType } from '@/redux/shopping-cart-slice';
 
+interface DeliveryScreenPropsType{
+  onComplete:()=>void;
+}
 
-const DeliveryScreen = () => {
+const DeliveryScreen = ({onComplete}:DeliveryScreenPropsType) => {
   const shoppingCart = useAppSelector(state=>state.shoppingCart)
   const priceTotal = shoppingCart.prices.grand_total.value
   const priceDelivery = shoppingCart.selectedDeliveryMethod? shoppingCart.selectedDeliveryMethod?.amount.value:0
@@ -44,7 +47,7 @@ setSelectedDelivery(item)
           <span>ŁĄCZNA KWOTA</span>
           <span><b>{priceTotal} {currency}</b></span>
         </div>
-        <button className={styles.button} disabled={selectedDelivery?false:true}>PRZEJDŹ DO PŁATNOŚCI</button>
+        <button className={styles.button} disabled={selectedDelivery?false:true} onClick={onComplete}>PRZEJDŹ DO PŁATNOŚCI</button>
       </div>
       
     
